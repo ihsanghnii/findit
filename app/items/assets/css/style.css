@@ -16,7 +16,8 @@
 }
 
 .hero .container {
-    margin-bottom: 12rem;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
 
 .card:hover {
