@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="../../index.php">FindIt</a>
+            <a class="navbar-brand" href="../../../index.php">FindIt</a>
             <div>
                 <span class="navbar-text me-3">Halo, <?= htmlspecialchars($_SESSION['user_name']) ?></span>
                 <a href="../../dashboard.php" class="btn btn-light me-2">Kembali</a>

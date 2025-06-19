@@ -1,12 +1,28 @@
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding-top: 1rem;
+    color: white;
+    min-height: 100vh;
 }
 
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/img/hero-bg.jpg');
-    background-size: cover;
-    color: white;
-     padding: 100px 0;
-    text-align: center;
+main {
+    margin-left: 17%;
+    padding: 2rem;
 }
+
+.card-img-top {
+    height: 180px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+.card:hover {
+    transform: translateY(-3px);
+    transition: 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+

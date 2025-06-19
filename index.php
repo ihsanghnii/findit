@@ -12,13 +12,80 @@ $recent_found = $mysqli->query("SELECT * FROM found_items ORDER BY created_at DE
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FindIt - Temukan Barang Hilang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="app/items/assets/style.css">
+    <style>
+        .card-img-top {
+            height: 200px;
+            object-fit: contain;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('app/items/assets/img/nf.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px;
+            text-align: center;
+        }
+
+        .hero .container {
+            margin-bottom: 12rem;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            transition: 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .features {
+            padding: 60px 0;
+            background: white;
+            margin-top: 6rem;
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -39,43 +106,76 @@ $recent_found = $mysqli->query("SELECT * FROM found_items ORDER BY created_at DE
     <!-- Hero Section -->
     <section class="hero mb-5">
         <div class="container">
-            <h1 class="display-4 fw-bold">Temukan Barang Hilang Anda</h1>
-            <p class="lead">Platform terbaik untuk melaporkan dan menemukan barang hilang</p>
+            <h1 class="display-4 fw-bold">Barang Hilang di Kampus? Tenang, Ada FindIt</h1><br>
+            <p class="lead">Temukan atau laporkan barang hilangmu dengan mudah di lingkungan STT Nurul Fikri.
+                Dari kelas, mushola, sampai kantin — semua bisa ditemukan kembali di sini.</p>
         </div>
     </section>
 
     <!-- Tombol Aksi -->
-<section class="container mb-5">
-    <?php
+    <section class="container mb-5">
+        <?php
         $form_link = isset($_SESSION['user_id']) ? 'app/dashboard.php' : 'app/auth/login.php';
-    ?>
-    <div class="card text-center shadow">
-        <div class="card-body">
-            <h4 class="card-title mb-3">Kehilangan atau Menemukan Barang?</h4>
-            <p class="card-text">Klik tombol di bawah ini untuk melaporkan barang hilang atau ditemukan.</p>
-            <a href="<?= $form_link ?>" class="btn btn-lg btn-primary">Daftarkan Barang</a>
+        ?>
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h4 class="card-title mb-3">Kehilangan atau Menemukan Barang?</h4>
+                <p class="card-text">Klik tombol di bawah ini untuk melaporkan barang hilang atau ditemukan.</p>
+                <a href="<?= $form_link ?>" class="btn btn-lg btn-primary">Daftarkan Barang</a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- service -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Kenapa Pakai Layanan Kami?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Komunitas Kampus</h3>
+                    <p>Platform ini dibangun untuk membantu mahasiswa dan civitas akademika NF saling bantu menemukan barang yang hilang di sekitar kampus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Proses Cepat</h3>
+                    <p>Laporkan atau temukan barang hanya dalam beberapa klik. Sistem kami langsung menampilkan laporan terbaru dari sesama pengguna.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Terverifikasi & Aman</h3>
+                    <p>Setiap laporan terhubung dengan akun pengguna, memastikan proses pelaporan dan pengembalian barang berlangsung lebih aman dan terpercaya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Recent Lost Items -->
     <section class="container mb-5">
         <h2 class="text-center mb-4">Barang Hilang Terbaru</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <?php foreach($recent_lost as $item): ?>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="<?= htmlspecialchars($item['image_path'] ?? 'assets/img/no-image.jpg') ?>" class="card-img-top" alt="<?= htmlspecialchars($item['title']) ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($item['title']) ?></h5>
-                        <p class="card-text"><?= htmlspecialchars($item['description']) ?></p>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <small class="text-muted">Lokasi: <?= htmlspecialchars($item['location_lost']) ?></small><br>
-                        <small class="text-muted">Tanggal: <?= htmlspecialchars($item['date_lost']) ?></small>
+            <?php foreach ($recent_lost as $item): ?>
+                <div class="col">
+                    <div class="card h-100 shadow-sm bg-light">
+                        <img src="<?= htmlspecialchars($item['image_path'] ?? 'assets/img/no-image.jpg') ?>" class="card-img-top" alt="<?= htmlspecialchars($item['title']) ?>">
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate"><?= htmlspecialchars($item['title']) ?></h5>
+                            <p class="card-text" style="max-height: 60px; overflow: hidden;">
+                                <?= htmlspecialchars($item['description']) ?>
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <small class="text-muted">Lokasi: <?= htmlspecialchars($item['location_lost']) ?></small><br>
+                            <small class="text-muted">Tanggal: <?= htmlspecialchars($item['date_lost']) ?></small>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </section>
@@ -84,20 +184,22 @@ $recent_found = $mysqli->query("SELECT * FROM found_items ORDER BY created_at DE
     <section class="container mb-5">
         <h2 class="text-center mb-4">Barang Ditemukan Terbaru</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <?php foreach($recent_found as $item): ?>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="<?= htmlspecialchars($item['image_path'] ?? 'assets/img/no-image.jpg') ?>" class="card-img-top" alt="<?= htmlspecialchars($item['title']) ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($item['title']) ?></h5>
-                        <p class="card-text"><?= htmlspecialchars($item['description']) ?></p>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                        <small class="text-muted">Lokasi: <?= htmlspecialchars($item['location_found']) ?></small><br>
-                        <small class="text-muted">Tanggal: <?= htmlspecialchars($item['date_found']) ?></small>
+            <?php foreach ($recent_found as $item): ?>
+                <div class="col">
+                    <div class="card h-100 shadow-sm bg-light">
+                        <img src="<?= htmlspecialchars($item['image_path'] ?? 'assets/img/no-image.jpg') ?>" class="card-img-top" alt="<?= htmlspecialchars($item['title']) ?>">
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate"><?= htmlspecialchars($item['title']) ?></h5>
+                            <p class="card-text" style="max-height: 60px; overflow: hidden;">
+                                <?= htmlspecialchars($item['description']) ?>
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <small class="text-muted">Lokasi: <?= htmlspecialchars($item['location_found']) ?></small><br>
+                            <small class="text-muted">Tanggal: <?= htmlspecialchars($item['date_found']) ?></small>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </section>
@@ -111,4 +213,5 @@ $recent_found = $mysqli->query("SELECT * FROM found_items ORDER BY created_at DE
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
