@@ -18,72 +18,7 @@ $recent_found = $mysqli->query("SELECT * FROM found_items ORDER BY created_at DE
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FindIt - Temukan Barang Hilang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .card-img-top {
-            height: 200px;
-            object-fit: contain;
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('app/items/assets/img/nf.jpg');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px;
-            text-align: center;
-        }
-
-        .hero .container {
-            margin-bottom: 12rem;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            transition: 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .features {
-            padding: 60px 0;
-            background: white;
-            margin-top: 6rem;
-            margin-bottom: 6rem;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .feature-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="app/items/assets/css/style.css">
 </head>
 
 <body>
